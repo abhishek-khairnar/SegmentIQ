@@ -1,0 +1,74 @@
+# Node dependencies & builds
+node_modules/
+frontend/node_modules/
+.next/
+frontend/.next/
+out/
+build/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+tsconfig.tsbuildinfo
+frontend/tsconfig.tsbuildinfo
+
+# Python & virtual environments
+__pycache__/
+*/__pycache__/
+*/*/__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+backend/venv/
+backend/.venv/
+venv/
+.venv/
+ENV/
+*.egg-info/
+.installed.cfg
+*.egg
+.pytest_cache/
+backend/.pytest_cache/
+
+# Databases & local storage
+*.db
+*.sqlite
+*.sqlite3
+segmentiq.db
+backend/segmentiq.db
+backend/storage/*
+!backend/storage/.gitkeep
+
+# Testing & reports
+playwright-report/
+frontend/playwright-report/
+test-results/
+frontend/test-results/
+coverage/
+*.log
+frontend/e2e/*.json
+
+# Environment variables (NEVER COMMIT)
+.env
+.env.*
+!.env.example
+backend/.env
+backend/.env.*
+!backend/.env.example
+frontend/.env
+frontend/.env.*
+!frontend/.env.example
+
+# IDE & Editor folders
+.vscode/
+.idea/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Ensure tracking of critical project assets
+!docs/screenshots/
+!backend/sample_data/*.csv
+!frontend/public/samples/*.csv

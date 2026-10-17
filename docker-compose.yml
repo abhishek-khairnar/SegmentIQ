@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: segmentiq-db
+    environment:
+      POSTGRES_USER: segmentiq
+      POSTGRES_PASSWORD: segmentiq_password
+      POSTGRES_DB: segmentiq
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U segmentiq -d segmentiq"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: segmentiq-backend
+    environment:
+      DATABASE_URL: postgresql://segmentiq:segmentiq_password@db:5432/segmentiq
+      SECRET_KEY: change-this-to-a-very-secure-random-key-in-production
+      ADMIN_EMAIL: admin@segmentiq.com
+      FRONTEND_ORIGIN: http://localhost:3000
+      STORAGE_DIR: storage
+      COOKIE_SECURE: "false"
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/storage:/app/storage
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: segmentiq-frontend
+    environment:
+      BACKEND_URL: http://backend:8000
+      NEXT_PUBLIC_APP_URL: http://localhost:3000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
