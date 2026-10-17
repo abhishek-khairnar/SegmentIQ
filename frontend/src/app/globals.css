@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+:root {
+  --background: #F7F8FC;
+  --surface: #FFFFFF;
+  --surface-raised: #F0F2FA;
+  --border: #E2E6F0;
+  --foreground: #0F1530;
+  --text-muted: #5B6483;
+  --accent: #6366F1;
+  --accent-hover: #818CF8;
+  --success: #22C55E;
+  --warning: #F59E0B;
+  --danger: #EF4444;
+  --card-radius: 12px;
+  --control-radius: 8px;
+}
+
+.dark {
+  --background: #0B0F1A;
+  --surface: #121829;
+  --surface-raised: #1A2238;
+  --border: #263052;
+  --foreground: #E6EAF5;
+  --text-muted: #8B95B3;
+  --accent: #6366F1;
+  --accent-hover: #818CF8;
+  --success: #22C55E;
+  --warning: #F59E0B;
+  --danger: #EF4444;
+}
+
+@theme {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-border: var(--border);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--text-muted);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --radius-card: var(--card-radius);
+  --radius-control: var(--control-radius);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Utility animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
